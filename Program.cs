@@ -77,6 +77,9 @@ namespace Level_Bot
                     HelpModeration(message);
                     break;
                 /* STUPID STUFF */
+                case "help other":
+                    message.Channel.SendMessageAsync("**`PSST, you entered the super secret panel!` \n !hello \n !age \n !isstarlkcool \n !iszekiahepiccool \n !isjmochiicool \n !amicool \n !isghastcool \n !ischqrrycool \n !ismihicool \n !ispettericool \n ||!vittu||");
+                    break;
                 case "isstarlkcool":
                     message.Channel.SendMessageAsync("*python, c#, v, python, c#, v, pytjon, c#, v, pyth...* \n Yes, he is very cool ||until he asks  what a struct is :joy:||.");
                     break;
