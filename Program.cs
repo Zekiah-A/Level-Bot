@@ -72,41 +72,40 @@ namespace Level_Bot
                 case "help moderation":
                     HelpModeration(message);
                     break;
+                /* STUPID STUFF */
+                case "isstarlkcool":
+                    message.Channel.SendMessageAsync("*python, c#, v, python, c#, v, pytjon, c#, v, pyth...* \n Yes, he is very cool ||until he asks  what a struct is :joy:||.");
+                    break;
+                case "iszekiahepiccool":
+                    message.Channel.SendMessageAsync(":sunglasses: \n He is my maker... He is the pinnacle of cool!");
+                    break;
+                case "isjmochiicool":
+                    message.Channel.SendMessageAsync("Indeed, it seems that is he quite cool, possibly sublime???? \n :sunglasses:");
+                    break;
+                case "amicool":
+                    message.Channel.SendMessageAsync("**A---- shush**, conceit is the bloat of society.");
+                    break;
+                case "isghastcool":
+                    message.Channel.SendMessageAsync("**TRUMP, TRUMP, TRUMP** \n :rainbow_flag:");
+                    break;
+                case "ischqrrycool":
+                    message.Channel.SendMessageAsync("!isjmochiicool");
+                    break;
+                case "ismihicool":
+                    message.Channel.SendMessageAsync("**ROCKET LEAGUE**... Yeah, he is vey cool, but that rocket league game is quite hard. :joy: \n `according to ghast:` \n `its not hard` \n `its ez to play` \n `hard to get good` \n Yeah... whatever lol.");
+                    break;
+                case "ispettericool":
+                    message.Channel.SendMessageAsync("__se on mita se on...__");
+                    break;
+                /* END OF STUPID */
                 default:
-                    if(command.Length > 1)
+                    if(command.Length > 2)
                     {
                         message.Channel.SendMessageAsync("Invalid Command: " + command);
                     }
                     break;
             }
             /*
-            //STUPID BIT :D
-            else if(command.Equals("isjmochiicool"))
-            {
-                message.Channel.SendMessageAsync("Indeed, it seems that is he quite cool, possibly sublime???? \n :sunglasses:");
-            }
-            else if(command.Equals("isghastcool"))
-            {
-                message.Channel.SendMessageAsync("**TRUMP, TRUMP, TRUMP** \n :rainbow_flag:");
-            }
-            else if(command.Equals("iszekiahepiccool"))
-            {
-                message.Channel.SendMessageAsync(":sunglasses: \n He is my maker... He is the pinnacle of cool!");
-            }
-            else if(command.Equals("ischqrrycool"))
-            {
-                message.Channel.SendMessageAsync("!isjmochiicool");
-            }
-            else if(command.Equals("ispettericool"))
-            {
-                message.Channel.SendMessageAsync("__se on mita se on...__");
-            }
-            else if(command.Equals("ismihicool"))
-            {
-                message.Channel.SendMessageAsync("**ROCKET LEAGUE**... Yeah, he is vey cool, but that rocket league game is quite hard. :joy: \n `according to ghast:` \n `its not hard` \n `its ez to play` \n `hard to get good` \n Yeah... whatever lol.");
-            }
-            //END OF STUPID BIT
-            */
             #endregion
             return Task.CompletedTask;
         }
