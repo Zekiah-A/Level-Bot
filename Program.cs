@@ -52,35 +52,32 @@ namespace Level_Bot
 
             //Commands begin here
             #region COMMANDS
-            if (command.Equals("hello")) //rm
+            switch(command)
             {
-                message.Channel.SendMessageAsync($@"Hello {message.Author.Mention}");
-            }
-            else if (command.Equals("age")) //rm
-            {
-                message.Channel.SendMessageAsync($@"Your account was created at {message.Author.CreatedAt.DateTime.Date}");
-            }
-            else if(command.Equals("help")){
-                Help(message);
-            }
-            else if(command.Equals("help commands"))
-            {
-                HelpCommands(message);
-            }
-            else if(command.Equals("help levels"))
-            {
-                HelpLevels(message);
-            }
-            else if(command.Equals("help moderation"))
-            {
-                HelpModeration(message);
-            }
-            else
-            {
-                if(command.Length > 1)
-                {
-                    message.Channel.SendMessageAsync("Invalid Command: " + command);
-                }
+                case "hello":
+                    message.Channel.SendMessageAsync($@"Hello {message.Author.Mention}");
+                    break;
+                case "age":
+                    message.Channel.SendMessageAsync($@"Your account was created at {message.Author.CreatedAt.DateTime.Date}");
+                    break;
+                case "help":
+                    Help(message);
+                    break;
+                case "help commands":
+                    HelpCommands(message);
+                    break;
+                case "help levels":
+                    HelpLevels(message);
+                    break;
+                case "help moderation":
+                    HelpModeration(message);
+                    break;
+                default:
+                    if(command.Length > 1)
+                    {
+                        message.Channel.SendMessageAsync("Invalid Command: " + command);
+                    }
+                    break;
             }
             /*
             //STUPID BIT :D
