@@ -8,8 +8,12 @@ namespace Level_Bot
 {
     class Program
     {
+        //public static void Main(string[] args)
+        //=> new Program().MainAsync().GetAwaiter().GetResult();// removed stupid lambads
         public static void Main(string[] args)
-        => new Program().MainAsync().GetAwaiter().GetResult();
+        {
+            new Program().MainAsync().GetAwaiter().GetResult(); 
+        }
 
         private DiscordSocketClient _client;
         public async Task MainAsync()
@@ -99,14 +103,14 @@ namespace Level_Bot
                     break;
                 /* END OF STUPID */
                 default:
-                    if(command.Length > 2)
+                    if(command.Length > 1)
                     {
                         message.Channel.SendMessageAsync("Invalid Command: " + command);
                     }
                     break;
             }
-            /*
             #endregion
+
             return Task.CompletedTask;
         }
         
