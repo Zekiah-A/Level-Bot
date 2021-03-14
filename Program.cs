@@ -101,6 +101,9 @@ namespace Level_Bot
                 case "ispettericool":
                     message.Channel.SendMessageAsync("__se on mita se on...__");
                     break;
+                case "vittu":
+                    message.Channel.SendFileAsync("mp4.mp4","When ei wiikend games.");
+                    break;
                 /* END OF STUPID */
                 default:
                     if(command.Length > 1)
@@ -121,7 +124,7 @@ namespace Level_Bot
             EmbedBuilder builder = new EmbedBuilder();
 
             builder.WithTitle("SCPE Vote bot help:");
-            builder.AddField("Commands", "!help comamnds", true);    // true - for inline
+            builder.AddField("Commands", "!help commands", true);    // true - for inline
             builder.AddField("Levels", "!help levels", true);
             builder.AddField("Moderation", "!help moderation", true);
             //builder.WithThumbnailUrl("http://...");
