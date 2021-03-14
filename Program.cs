@@ -15,8 +15,8 @@ namespace Level_Bot
         public async Task MainAsync()
         {
             _client = new DiscordSocketClient();
-            _client.MessageReceived += CommandHandler;
-            _client.Log += Log;
+            _client.MessageReceived += CommandHandler; //Send bot messages to cmd handler
+            _client.Log += Log; //Send logs to the log function / task / whatever
 
             var token = File.ReadAllText("token.txt");
 
@@ -51,25 +51,17 @@ namespace Level_Bot
             command = message.Content.Substring(1, lengthOfCommand - 1).ToLower();
 
             //Commands begin here
-            if (command.Equals("hello"))
+            #region COMMANDS
+            if (command.Equals("hello")) //rm
             {
                 message.Channel.SendMessageAsync($@"Hello {message.Author.Mention}");
             }
-            else if (command.Equals("age"))
+            else if (command.Equals("age")) //rm
             {
                 message.Channel.SendMessageAsync($@"Your account was created at {message.Author.CreatedAt.DateTime.Date}");
             }
             else if(command.Equals("help")){
-                EmbedBuilder builder = new EmbedBuilder();
-
-                builder.WithTitle("SCPE Vote bot help:");
-                builder.AddField("Commands", "!help comamnds", true);    // true - for inline
-                builder.AddField("Levels", "!help levels", true);
-                builder.AddField("Moderation", "!help moderation", true);
-                //builder.WithThumbnailUrl("http://...");
-
-                builder.WithColor(Color.Gold);
-                message.Channel.SendMessageAsync("", false, builder.Build());
+                Help(message);
             }
             else if(command.Equals("help commands"))
             {
@@ -83,6 +75,14 @@ namespace Level_Bot
             {
                 HelpModeration(message);
             }
+            else
+            {
+                if(command.Length > 1)
+                {
+                    message.Channel.SendMessageAsync("Invalid Command: " + command);
+                }
+            }
+            /*
             //STUPID BIT :D
             else if(command.Equals("isjmochiicool"))
             {
@@ -109,10 +109,26 @@ namespace Level_Bot
                 message.Channel.SendMessageAsync("**ROCKET LEAGUE**... Yeah, he is vey cool, but that rocket league game is quite hard. :joy: \n `according to ghast:` \n `its not hard` \n `its ez to play` \n `hard to get good` \n Yeah... whatever lol.");
             }
             //END OF STUPID BIT
+            */
+            #endregion
             return Task.CompletedTask;
         }
         
-        #region HELP COMMANDS    
+        #region HELP COMMANDS
+
+        private void Help(SocketMessage message)
+        {
+            EmbedBuilder builder = new EmbedBuilder();
+
+            builder.WithTitle("SCPE Vote bot help:");
+            builder.AddField("Commands", "!help comamnds", true);    // true - for inline
+            builder.AddField("Levels", "!help levels", true);
+            builder.AddField("Moderation", "!help moderation", true);
+            //builder.WithThumbnailUrl("http://...");
+
+            builder.WithColor(Color.Gold);
+            message.Channel.SendMessageAsync("", false, builder.Build());
+        }
         private void HelpCommands(SocketMessage  message)
         {
             EmbedBuilder builder = new EmbedBuilder();
@@ -150,6 +166,7 @@ namespace Level_Bot
             builder.WithColor(Color.Gold);
             message.Channel.SendMessageAsync("", false, builder.Build());
         }
+
         #endregion
     }
 }
