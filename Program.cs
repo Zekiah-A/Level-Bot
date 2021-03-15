@@ -64,6 +64,7 @@ namespace Level_Bot
                 case "age":
                     message.Channel.SendMessageAsync($@"Your account was created at {message.Author.CreatedAt.DateTime.Date}");
                     break;
+                /* HELP COMMANDS */
                 case "help":
                     Help(message);
                     break;
@@ -75,6 +76,16 @@ namespace Level_Bot
                     break;
                 case "help moderation":
                     HelpModeration(message);
+                    break;
+                /* GENERAL COMMANDS */
+                case "ip":
+                    Ip(message);
+                    break;
+                case "apply":
+                    Apply(message);
+                    break;
+                case "vote":
+                    Vote(message);
                     break;
                 /* STUPID STUFF */
                 case "help other":
@@ -120,7 +131,25 @@ namespace Level_Bot
             return Task.CompletedTask;
         }
         
-        #region HELP COMMANDS
+        //private Task SearchAndDestroy(SocketMessage message)
+        //{ } 
+
+        #region GENERAL_COMMANDS
+        private void Ip(SocketMessage message) 
+        {
+            message.Channel.SendMessageAsync("ip: `suomicraftpe.ddns.net`\nport: `13132`");
+        }
+        private void Apply(SocketMessage message)
+        {
+            message.Channel.SendMessageAsync("Want to apply for builder or staff? \nVisit `suomicraftpe.tk/apply` and submit an application!");
+        }
+        private void Vote(SocketMessage message)
+        {
+            message.Channel.SendMessageAsync("Thankyou! You are breathtaking: `bit.ly/suomicraftpe-vote` :heartpulse:");
+        }
+        #endregion
+
+        #region HELP_COMMANDS
 
         private void Help(SocketMessage message)
         {
@@ -142,7 +171,7 @@ namespace Level_Bot
             builder.WithTitle("Commands:");
             builder.AddField("!apply", "Apply for staff.", true);
             builder.AddField("!ip", "Show server IP.", true);
-            builder.AddField("!vote", "Vote for the server :slight_smile:.", true);
+            builder.AddField("!vote", "Vote for the server. :heartpulse:", true);
 
             builder.WithColor(Color.Gold);
             message.Channel.SendMessageAsync("", false, builder.Build());
@@ -174,5 +203,6 @@ namespace Level_Bot
         }
 
         #endregion
+
     }
 }
