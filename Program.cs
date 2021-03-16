@@ -41,17 +41,24 @@ namespace Level_Bot
         {
             //variables
             string command = "";
+            string args = "";
             int lengthOfCommand = -1;
 
             //checking messages for commands begin here
             if (!message.Content.StartsWith('!')) //This is your prefix
                 return Task.CompletedTask;
-
             if (message.Author.IsBot) //ei bot commands :D
                 return Task.CompletedTask;
             else
+            {
                 lengthOfCommand = message.Content.Length;
 
+                if (message.Content.Contains(' ')) //handle cmd arguments
+                { 
+                    lengthOfCommand = message.Content.IndexOf(' ');
+                    args = message.Content.Substring(message.Content.IndexOf(" ") + 1);
+                }
+            }
             command = message.Content.Substring(1, lengthOfCommand - 1).ToLower();
 
             //Commands begin here
@@ -66,16 +73,31 @@ namespace Level_Bot
                     break;
                 /* HELP COMMANDS */
                 case "help":
-                    Help(message);
+                    switch(args)
+                    {
+                        case "commands":
+                            HelpCommands(message);
+                            break;
+                        case "levels":
+                            HelpLevels(message);
+                            break;
+                        case "moderation":
+                            HelpModeration(message);
+                            break;
+                        default:
+                            Help(message);
+                            break;
+                    }
                     break;
-                case "help commands":
-                    HelpCommands(message);
+                /* MODERATION COMMANDS */
+                case "ban":
+                    Ban(message, null, null);
                     break;
-                case "help levels":
-                    HelpLevels(message);
+                case "kick":
+                    Kick(message, null, null);
                     break;
-                case "help moderation":
-                    HelpModeration(message);
+                case "mute":
+                    Mute(message, null, null);
                     break;
                 /* GENERAL COMMANDS */
                 case "ip":
@@ -145,12 +167,11 @@ namespace Level_Bot
         }
         private void Vote(SocketMessage message)
         {
-            message.Channel.SendMessageAsync("Thankyou! You are breathtaking: `bit.ly/suomicraftpe-vote` :heartpulse:");
+            message.Channel.SendMessageAsync("Thank you! You are breathtaking: `bit.ly/suomicraftpe-vote` :heartpulse:");
         }
         #endregion
 
         #region HELP_COMMANDS
-
         private void Help(SocketMessage message)
         {
             EmbedBuilder builder = new EmbedBuilder();
@@ -201,8 +222,22 @@ namespace Level_Bot
             builder.WithColor(Color.Gold);
             message.Channel.SendMessageAsync("", false, builder.Build());
         }
-
         #endregion
 
+        #region MODERATOR_COMMANDS
+        private void Ban(SocketMessage message, string uuid, string reason)
+        {
+            string actor = message.Author.ToString();
+            Console.WriteLine(actor + " banned user for reason: [null]");
+        }
+        private void Kick(SocketMessage message, string uuid, string reason)
+        {
+
+        }
+        private void Mute(SocketMessage message, string uuid, string reason)
+        {
+
+        }
+        #endregion
     }
 }
