@@ -90,8 +90,14 @@ namespace Level_Bot
                     }
                     break;
                 /* MODERATION COMMANDS */
+                case "purge":
+                    Purge(message, args);
+                    break;
                 case "ban":
                     Ban(message, null, null);
+                    break;
+                case "unban":
+                    Unban(message, null, null);
                     break;
                 case "kick":
                     Kick(message, null, null);
@@ -153,8 +159,15 @@ namespace Level_Bot
             return Task.CompletedTask;
         }
         
-        //private Task SearchAndDestroy(SocketMessage message)
-        //{ } 
+        private bool SearchAndDestroy(SocketMessage message)
+        {
+            /* RETURNS TRUE - DELS */
+            //caps check
+            //emoticon check --3 offenses -> 3 min mute! | extra min from tehre onwards
+            //curse check
+            //spamm check
+
+        } 
 
         #region GENERAL_COMMANDS
         private void Ip(SocketMessage message) 
@@ -225,10 +238,37 @@ namespace Level_Bot
         #endregion
 
         #region MODERATOR_COMMANDS
+        private void Purge(SocketMessage msg, String args)
+        {
+            try
+            {
+                int count = int.Parse(args);
+                if(count < 100)
+                {
+                    msg.Channel.SendMessageAsync("`_Caching messages for deletion. Please be patient.._`");
+                    var messages = msg.Channel.GetMessagesAsync(count).FlattenAsync(); //defualt is 100
+                    msg.Channel.DeleteMessagesAsync(messages);
+
+                    msg.Channel.SendMessageAsync($"Removed {count} {(count > 1 ? "messages" : "message")}.");
+                }else 
+                {
+                    message.Channel.SendMessageAsync($"Warning: You are purging {count} messages. Use `!purge --force [value]` to confirm action.");
+                }
+            }catch(Exception e)
+            {
+                msg.Channel.SendMessageAsync("An error has occurred: A number is required for messages to  purge.");
+                console.WriteLine($"Could not purge messages: {e}");
+            }
+        }
         private void Ban(SocketMessage message, string uuid, string reason)
         {
             string actor = message.Author.ToString();
             Console.WriteLine(actor + " banned user for reason: [null]");
+            //user.KickAsync(reason);
+        }
+        private void Unban(SocketMessage message, string uuid, string reason)
+        {
+
         }
         private void Kick(SocketMessage message, string uuid, string reason)
         {
